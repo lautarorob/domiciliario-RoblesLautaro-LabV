@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                template="./templates/layout.xhtml">
+
+    <ui:define name="content">
+        <body id="bodyMain">
+            <section>
+                <article class="Titulos">
+                    <h1>Mi pagina Principal</h1>
+                    <h2>Trabajo Domiciliario Robles Lautaro</h2>
+                </article>
+
+                <article class="Consignas">
+                    <h3><strong> Consignas: </strong></h3>
+                    <p>Teniendo en cuenta el script SQL world.sql se pide que realice lo siguiente:
+                        <ol>
+                            <li>Generar la plantilla con la cual trabajará todo el sitio. Se debe implementar<br/>
+                                Bootstrap para manejar el estilo del sitio.</li>
+                            <li>Generar un ABML para la entidad ciudades (city). El código de país debe poder<br/>
+                                seleccionarse desde una lista desplegable. Los códigos de país se encuentran en la
+                                tabla de países (country).</li>
+                            <li>Validar mediante javascript que los campos del formulario para agregar o editar<br/>
+                                ciudades en el caso de datos de tipo string no sean vacíos y para el caso de datos<br/>
+                                de tipo numérico sean mayor a cero y sean efectivamente numéricos. Controlar
+                                que se haya elegido un país.</li>
+                            <li>Controlar en el lado del servidor que al agregar ciudades no existan en la base de<br/>
+                                datos. En caso de existir mostrar como error de validación.</li>
+                            <li>Mostrar en una página llamada informe.xhtml un listado con el tamaño de la<br/>
+                                población de los distintos distritos de un país. En el informe, en lugar de mostrar<br/>
+                                el código del país, mostrar el nombre completo.</li>
+                        </ol></p>
+                </article>
+
+            </section>
+        </body>
+    </ui:define>
+
+</ui:composition>

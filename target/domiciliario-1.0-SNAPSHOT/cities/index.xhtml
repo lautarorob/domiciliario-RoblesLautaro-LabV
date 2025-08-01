@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                template="./../templates/layout.xhtml">
+
+    <ui:define name="content">
+        <h1> Ciudades </h1>
+        <f:view>
+
+            <h:form>
+                <!-- BARRA DE BÚSQUEDA -->
+                <h:panelGrid columns="3" style="margin-bottom: 20px;">
+                    <h:outputLabel value="Buscar ciudad: " for="busqueda"/>
+                    <h:inputText id="busqueda" 
+                                 value="#{viewScope.nombreBusqueda}"
+                                 size="30"
+                                 title="Nombre de ciudad"/>
+                    <h:commandButton value="Buscar" 
+                                     action="#{controladorCity.cityPorNombre(viewScope.nombreBusqueda)}"
+                                     style="margin-left: 10px;"/>
+                </h:panelGrid>
+
+                <!-- MOSTRAR RESULTADO -->
+                <h:panelGroup rendered="#{not empty viewScope.nombreBusqueda}">
+                    <h3>Resultado de búsqueda:</h3>
+                    <h:dataTable value="#{controladorCity.cityPorNombre(viewScope.nombreBusqueda)}" var="ciudad" border="1">
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Name" style="margin-right: 100px"/>
+                            </f:facet>
+                            <h:outputText value="#{ciudad.name}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="District" style="margin-right: 100px"/>
+                            </f:facet>
+                            <h:outputText value="#{ciudad.district}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Population" style="margin-right: 100px"/>
+                            </f:facet>
+                            <h:outputText value="#{ciudad.population}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="CountryCode"/>
+                            </f:facet>
+                            <h:outputText value="#{ciudad.countryCode}"/>
+                        </h:column>
+
+                        <h:column>
+                            <h:link value="Editar" outcome="/cities/editar.xhtml" style="margin-right: 10px">
+                                <f:param name="id" value="#{ciudad.id}"/>
+                            </h:link>
+                        </h:column>
+
+                        <h:column>
+                            <h:commandLink value="Eliminar" action="#{controladorCity.eliminar(ciudad.id)}" onclick="return confirm('¿Confirma que desea eliminar?')"></h:commandLink>
+                        </h:column>
+
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:form>
+
+            <!-- LISTADO GENERAL -->
+            <h:form>
+                <h2><h:outputText value="Listado de Ciudades"/></h2>
+                <h:dataTable value="#{controladorCity.listadoCities()}" var="item">
+
+                    <!--  <h:column>
+                          <f:facet name="header">
+                              <h:outputText value="Id"/>
+                          </f:facet>
+                          <h:outputText value="#{item.id}"/>
+                      </h:column>-->
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Name"/>
+                        </f:facet>
+                        <h:outputText value="#{item.name}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="District"/>
+                        </f:facet>
+                        <h:outputText value="#{item.district}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Population" style="margin-right: 100px"/>
+                        </f:facet>
+                        <h:outputText value="#{item.population}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="CountryCode" style="margin-right: 10px"/>
+                        </f:facet>
+
+                        <h:outputText value="#{item.countryCode}" style="margin-right: 10px"/>
+                    </h:column>
+                    <h:column>
+                        <h:link value="Editar" outcome="/cities/editar.xhtml" style="margin-right: 10px">
+                            <f:param name="id" value="#{item.id}"/>
+                        </h:link>
+                    </h:column>
+
+                    <h:column>
+                        <h:commandLink value="Eliminar" action="#{controladorCity.eliminar(item.id)}" onclick="return confirm('¿Confirma que desea eliminar?')"></h:commandLink>
+                    </h:column>
+
+                </h:dataTable>
+            </h:form>
+
+        </f:view>   
+    </ui:define>
+
+</ui:composition>

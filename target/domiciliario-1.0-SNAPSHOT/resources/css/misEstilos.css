@@ -1,0 +1,25 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : 27 jul 2025, 20:42:39
+    Author     : roble
+*/
+
+#bodyMain section .Titulos{
+    display: block;
+    text-align: center;
+    font-family: sans-serif;
+    margin: 0;
+}
+
+#bodyMain section .Consignas{
+    font-family: sans-serif;
+    margin: 0;
+}
+.error-ingreso{
+    color: red;
+    font-size: 13pt;
+    font-weight: bold;
+}
