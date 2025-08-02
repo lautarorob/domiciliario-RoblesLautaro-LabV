@@ -47,6 +47,7 @@ public class controladorCity {
 
     // Clase interna para representar un país con sus distritos
     public static class PaisConDistritos {
+
         private String nombrePais;
         private String codigoPais;
         private List<Object[]> distritos;
@@ -103,7 +104,7 @@ public class controladorCity {
     public City cityPorNombre(String nombre) {
         return repositorio.PorNombre(nombre);
     }
-    
+
     public List<City> cityPorDistrito(String distrito) {
         return repositorio.PorDistrito(distrito);
     }
@@ -131,7 +132,7 @@ public class controladorCity {
 
     public void cargarPoblacionTodosLosPaises() {
         poblacionTodosLosPaises = new ArrayList<>();
-        
+
         for (Country pais : listaPaises) {
             List<Object[]> distritosDelPais = repositorio.poblacionPorDistrito(pais.getCode());
             if (!distritosDelPais.isEmpty()) {
@@ -216,5 +217,10 @@ public class controladorCity {
 
     public void setPoblacionTodosLosPaises(List<PaisConDistritos> poblacionTodosLosPaises) {
         this.poblacionTodosLosPaises = poblacionTodosLosPaises;
+    }
+
+    public void limpiarSeleccion() {
+        this.codigoPaisSeleccionado = "";
+        this.poblacionDistritos = null; // o new ArrayList<>();
     }
 }

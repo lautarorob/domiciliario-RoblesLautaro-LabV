@@ -12,7 +12,7 @@
 
             <h:form>
                 <!-- BARRA DE BÚSQUEDA -->
-                <h:panelGrid columns="3" style="margin-bottom: 20px;">
+                <h:panelGrid columns="4" style="margin-bottom: 20px;">
                     <h:outputLabel value="Buscar ciudad: " for="busqueda"/>
                     <h:inputText id="busqueda" 
                                  value="#{viewScope.nombreBusqueda}"
@@ -21,7 +21,9 @@
                     <h:commandButton value="Buscar" 
                                      action="#{controladorCity.cityPorNombre(viewScope.nombreBusqueda)}"
                                      style="margin-left: 10px;"/>
+                    <h:commandButton value="Nuevo" action="nuevo?faces-redirect=true" style="margin-left: 10px;"/>
                 </h:panelGrid>
+
 
                 <!-- MOSTRAR RESULTADO -->
                 <h:panelGroup rendered="#{not empty viewScope.nombreBusqueda}">

@@ -45,7 +45,7 @@ function validarFormulario() {
         errorPopulation.textContent = "La población es obligatoria";
         errorPopulation.classList.add("error-ingreso");
         isValid = false;
-    } else if (isNaN(populationValue) || parseInt(populationValue) < 0) {
+    } else if (isNaN(populationValue) || parseInt(populationValue) <= 0) {
         errorPopulation.textContent = "Población inválida";
         errorPopulation.classList.add("error-ingreso");
         isValid = false;

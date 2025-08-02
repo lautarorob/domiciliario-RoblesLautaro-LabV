@@ -22,13 +22,13 @@
                     </h:selectOneMenu>
                     <h:commandButton value="Buscar" action="#{controladorCity.mostrarPoblacionDistritos}" />
                 </h:panelGrid>
-                
+
                 <!-- Mostrar nombre del país seleccionado -->
                 <h:panelGroup rendered="#{not empty controladorCity.poblacionDistritos}">
                     <h2>País: #{controladorCity.poblacionDistritos[0][2]}</h2>
                 </h:panelGroup>
-                
-                <!-- Tabla con población por distrito del país seleccionado -->
+
+                 <!-- Tabla con población por distrito del país seleccionado -->
                 <h:dataTable value="#{controladorCity.poblacionDistritos}" var="item"
                              rendered="#{not empty controladorCity.poblacionDistritos}"
                              border="1" styleClass="data-table" style="margin-bottom: 30px;">
@@ -47,44 +47,56 @@
                         </h:outputText>
                     </h:column>
                 </h:dataTable>
-                
+
                 <!-- Mensaje si no hay datos para el país seleccionado -->
                 <h:panelGroup rendered="#{empty controladorCity.poblacionDistritos and not empty controladorCity.codigoPaisSeleccionado}">
                     <h:outputText value="No se encontraron datos para el país seleccionado." style="color: red;" />
                 </h:panelGroup>
             </h:form>
-            
-            <!-- LISTA GENERAL DE TODOS LOS PAÍSES -->
-            <hr style="margin: 30px 0;"/>
-            <h2>Lista General de Países y Distritos</h2>
-            
-            <!-- Iterar sobre todos los países con distritos -->
-            <ui:repeat value="#{controladorCity.poblacionTodosLosPaises}" var="paisConDistritos">
-                <div style="margin-bottom: 30px;">
-                    <h3>País: #{paisConDistritos.nombrePais}</h3>
-                    <h:dataTable value="#{paisConDistritos.distritos}" var="distrito"
-                                  border="1" styleClass="data-table" style="margin-left: 20px;">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Distrito" style="margin-right: 50px;"/>
-                            </f:facet>
-                            <h:outputText value="#{distrito[0]}" />
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Población Total"/>
-                            </f:facet>
-                            <h:outputText value="#{distrito[1]}">
-                                <f:convertNumber pattern="#,###" />
-                            </h:outputText>
-                        </h:column>
-                    </h:dataTable>
-                </div>
-            </ui:repeat>
-            
-            <!-- Mensaje si no hay datos generales -->
-            <h:panelGroup rendered="#{empty controladorCity.poblacionTodosLosPaises}">
-                <h:outputText value="No se encontraron datos de población por distrito." style="color: red;" />
+
+            <!-- LISTA GENERAL DE TODOS LOS PAÍSES - Solo se muestra si NO hay país seleccionado -->
+            <h:panelGroup rendered="#{empty controladorCity.codigoPaisSeleccionado or empty controladorCity.poblacionDistritos}">
+                <hr style="margin: 30px 0;"/>
+                <h2>Lista General de Países y Distritos</h2>
+
+                <!-- Iterar sobre todos los países con distritos -->
+                <ui:repeat value="#{controladorCity.poblacionTodosLosPaises}" var="paisConDistritos">
+                    <div style="margin-bottom: 30px;">
+                        <h3>País: #{paisConDistritos.nombrePais}</h3>
+                        <h:dataTable value="#{paisConDistritos.distritos}" var="distrito"
+                                     border="1" styleClass="data-table" style="margin-left: 20px;">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Distrito" style="margin-right: 50px;"/>
+                                </f:facet>
+                                <h:outputText value="#{distrito[0]}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Población Total"/>
+                                </f:facet>
+                                <h:outputText value="#{distrito[1]}">
+                                    <f:convertNumber pattern="#,###" />
+                                </h:outputText>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </ui:repeat>
+
+                <!-- Mensaje si no hay datos generales -->
+                <h:panelGroup rendered="#{empty controladorCity.poblacionTodosLosPaises}">
+                    <h:outputText value="No se encontraron datos de población por distrito." style="color: red;" />
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <!-- Botón para limpiar selección y volver a mostrar todos los países (opcional) -->
+            <h:panelGroup rendered="#{not empty controladorCity.codigoPaisSeleccionado and not empty controladorCity.poblacionDistritos}">
+                <hr style="margin: 30px 0;"/>
+                <h:form>
+                    <h:commandButton value="Mostrar todos los países" 
+                                     action="#{controladorCity.limpiarSeleccion}"
+                                     style="background-color: #f0f0f0; padding: 10px 15px; border: 1px solid #ccc;" />
+                </h:form>
             </h:panelGroup>
         </f:view>
     </ui:define>
