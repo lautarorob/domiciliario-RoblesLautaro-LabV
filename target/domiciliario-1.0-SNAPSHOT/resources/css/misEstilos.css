@@ -23,3 +23,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
     font-size: 13pt;
     font-weight: bold;
 }
+
+.tablaIndex{
+    border: solid black 1px;
+    width: 100%;
+    align-items: start;
+}
+
+.tablaIndex th, .tablaIndex td{
+    border: solid black 1px;
+    border-collapse: collapse;
+    padding: 0.3em;
+}
+
+.container{
+    margin-left: 20px;
+}

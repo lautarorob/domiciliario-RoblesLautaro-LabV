@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                template="./../templates/layout.xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core">
+
+    <ui:define name="content">
+        <f:view>
+
+
+
+            <h:form>
+                <h1><h:outputText value="Nuevo Pais"/></h1>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Code:" for="code" />
+                    <h:inputText id="code" value="#{controladorCountry.country().code}" title="Code" required="true" requiredMessage="The Code field is required."/>
+
+                    <h:outputLabel value="Name:" for="name" />
+                    <h:inputText id="name" value="#{controladorCountry.country().name}" title="Name" required="true" requiredMessage="The Name field is required."/>
+
+                    <h:outputLabel value="Continent:" for="continent" />
+                    <h:selectOneMenu id="continent" value="#{controladorCountry.country().continent}" required="true" requiredMessage="The Continent field is required.">
+                        <f:selectItem itemLabel="--Seleccionar--" noSelectionOption="true" itemValue=""/>
+                        <f:selectItem itemLabel="Asia" itemValue="Asia"/>
+                        <f:selectItem itemLabel="Europe" itemValue="Europe"/>
+                        <f:selectItem itemLabel="North America" itemValue="North America"/>
+                        <f:selectItem itemLabel="Africa" itemValue="Africa"/>
+                        <f:selectItem itemLabel="Oceania" itemValue="Oceania"/>
+                        <f:selectItem itemLabel="Antarctica" itemValue="Antarctica"/>
+                        <f:selectItem itemLabel="South America" itemValue="South America"/>
+                    </h:selectOneMenu>
+
+
+
+                    <h:outputLabel value="Region:" for="region" />
+                    <h:inputText id="region" value="#{controladorCountry.country().region}" title="Region" required="true" requiredMessage="The Region field is required." readonly="true"/>
+
+                    <h:outputLabel value="SurfaceArea:" for="surfaceArea" />
+                    <h:inputText id="surfaceArea" value="#{controladorCountry.country().surfaceArea}" title="SurfaceArea" required="true" requiredMessage="The SurfaceArea field is required." readonly="true"/>
+
+                    <h:outputLabel value="IndepYear:" for="indepYear" />
+                    <h:inputText id="indepYear" value="#{controladorCountry.country().indepYear}" title="IndepYear" readonly="true"/>
+
+                    <h:outputLabel value="Population:" for="population" />
+                    <h:inputText id="population" value="#{controladorCountry.country().population}" title="Population" required="true" requiredMessage="The Population field is required." readonly="true"/>
+
+                    <h:outputLabel value="LifeExpectancy:" for="lifeExpectancy" />
+                    <h:inputText id="lifeExpectancy" value="#{controladorCountry.country().lifeExpectancy}" title="LifeExpectancy" readonly="true"/>
+
+                    <h:outputLabel value="Gnp:" for="gnp" />
+                    <h:inputText id="gnp" value="#{controladorCountry.country().gnp}" title="Gnp" readonly="true"/>
+
+                    <h:outputLabel value="GNPOld:" for="GNPOld" />
+                    <h:inputText id="GNPOld" value="#{controladorCountry.country().GNPOld}" title="GNPOld" readonly="true"/>
+
+                    <h:outputLabel value="LocalName:" for="localName" />
+                    <h:inputText id="localName" value="#{controladorCountry.country().localName}" title="LocalName" required="true" requiredMessage="The LocalName field is required." readonly="true"/>
+
+                    <h:outputLabel value="GovernmentForm:" for="governmentForm" />
+                    <h:inputText id="governmentForm" value="#{controladorCountry.country().governmentForm}" title="GovernmentForm" required="true" requiredMessage="The GovernmentForm field is required." readonly="true"/>
+
+                    <h:outputLabel value="HeadOfState:" for="headOfState" />
+                    <h:inputText id="headOfState" value="#{controladorCountry.country().headOfState}" title="HeadOfState" readonly="true"/>
+
+                    <h:outputLabel value="Capital:" for="capital" />
+                    <h:inputText id="capital" value="#{controladorCountry.country().capital}" title="Capital" readonly="true"/>
+
+                    <h:outputLabel value="Code2:" for="code2" />
+                    <h:inputText id="code2" value="#{controladorCountry.country().code2}" title="Code2" required="true" requiredMessage="The Code2 field is required." readonly="true"/>
+
+
+                    <h:commandButton value="Agregar" action="#{controladorCountry.guardar()}" style="margin-top: 10px;"/>
+                    <h:panelGroup></h:panelGroup>
+                </h:panelGrid>
+            </h:form>
+
+
+        </f:view>
+
+    </ui:define>
+
+</ui:composition>

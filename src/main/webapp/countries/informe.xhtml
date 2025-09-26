@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                template="./../templates/layout.xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:c="jakarta.tags.core">
+    <ui:define name="content">
+        <h1>Informe: Población y Esperanza de Vida por Región</h1>
+        <f:view>
+            <h:form>
+                <!-- SELECCIÓN DE CONTINENTE -->
+                <h:panelGrid columns="2" style="margin-bottom: 20px;">
+                    <h:outputLabel for="continente" value="Seleccione un continente:" />
+                    <h:selectOneMenu id="continente" value="#{controladorCountry.continenteSeleccionado}">
+                        <f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+                        <f:selectItems value="#{controladorCountry.listaContinentes}"
+                                       var="continente"
+                                       itemValue="#{continente}"
+                                       itemLabel="#{continente}" />
+                    </h:selectOneMenu>
+                    <h:commandButton value="Buscar" action="#{controladorCountry.mostrarDatosPorContinente}" />
+                </h:panelGrid>
+
+                <!-- Mostrar datos del continente seleccionado -->
+                <h:panelGroup rendered="#{not empty controladorCountry.datosPorContinente}">
+                    <h2>Continente: #{controladorCountry.datosPorContinente[0][0]}</h2>
+                </h:panelGroup>
+
+                <!-- Tabla con datos del continente seleccionado -->
+                <h:dataTable value="#{controladorCountry.datosPorContinente}" var="item"
+                             rendered="#{not empty controladorCountry.datosPorContinente}"
+                             border="1" styleClass="data-table" style="margin-bottom: 30px;">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Región" style="margin-right: 60px;"/>
+                        </f:facet>
+                        <h:outputText value="#{item[1]}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Población Total" style="margin-right: 25px"/>
+                        </f:facet>
+                        <h:outputText value="#{item[2]}">
+                            <f:convertNumber pattern="#,###" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Promedio Esp.Vida" style="margin-right: 25px"/>
+                        </f:facet>
+                        <h:outputText value="#{item[3]}">
+                            <f:convertNumber pattern="#0.0" />
+                        </h:outputText>
+                        <h:outputText value=" años" />
+                    </h:column>
+                </h:dataTable>
+
+                <!-- Mensaje si no hay datos para el continente seleccionado -->
+                <h:panelGroup rendered="#{empty controladorCountry.datosPorContinente and not empty controladorCountry.continenteSeleccionado}">
+                    <h:outputText value="No se encontraron datos para el continente seleccionado." style="color: red;" />
+                </h:panelGroup>
+            </h:form>
+
+            <!-- LISTA GENERAL DE TODOS LOS CONTINENTES - Solo se muestra si NO hay continente seleccionado -->
+            <h:panelGroup rendered="#{empty controladorCountry.continenteSeleccionado or empty controladorCountry.datosPorContinente}">
+                <hr style="margin: 30px 0;"/>
+                <h2>Lista General de Continentes y Regiones</h2>
+
+                <!-- Iterar sobre todos los continentes con sus regiones -->
+                <ui:repeat value="#{controladorCountry.datosTodosLosContinentes}" var="continenteConRegiones">
+                    <div style="margin-bottom: 30px;">
+                        <h3>Continente: #{continenteConRegiones.nombreContinente}</h3>
+                        <h:dataTable value="#{continenteConRegiones.regiones}" var="region"
+                                     border="1" styleClass="data-table" style="margin-left: 20px;">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Región" style="margin-right: 60px;"/>
+                                </f:facet>
+                                <h:outputText value="#{region[1]}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Población Total" style="margin-right: 40px"/>
+                                </f:facet>
+                                <h:outputText value="#{region[2]}">
+                                    <f:convertNumber pattern="#,###" />
+                                </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Promedio Esp.Vida" style="margin-right: 25px"/>
+                                </f:facet>
+                                <h:outputText value="#{region[3]}">
+                                    <f:convertNumber pattern="#0.0" />
+                                </h:outputText>
+                                <h:outputText value=" años" />
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </ui:repeat>
+
+                <!-- Mensaje si no hay datos generales -->
+                <h:panelGroup rendered="#{empty controladorCountry.datosTodosLosContinentes}">
+                    <h:outputText value="No se encontraron datos de población y esperanza de vida por región." style="color: red;" />
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <!-- Botón para limpiar selección y volver a mostrar todos los continentes -->
+            <h:panelGroup rendered="#{not empty controladorCountry.continenteSeleccionado and not empty controladorCountry.datosPorContinente}">
+                <hr style="margin: 30px 0;"/>
+                <h:form>
+                    <h:commandButton value="Mostrar todos los continentes" 
+                                     action="#{controladorCountry.limpiarSeleccion}"
+                                     style="background-color: #f0f0f0; padding: 10px 15px; border: 1px solid #ccc;" />
+                </h:form>
+            </h:panelGroup>
+        </f:view>
+    </ui:define>
+</ui:composition>

@@ -59,7 +59,7 @@ public class repositorioCity {
             return null;
         }
     }
-    
+
     public List<City> PorDistrito(String distrito) {
         if (distrito == null || distrito.trim().isEmpty()) {
             return null;
@@ -67,7 +67,7 @@ public class repositorioCity {
         try {
             Query q = em.createQuery("SELECT c FROM City c WHERE c.district = :district", City.class);
             q.setParameter("district", distrito.trim());
-          //  q.setMaxResults(1);
+            //  q.setMaxResults(1);
             return q.getResultList();
         } catch (NoResultException e) {
             return null; // No se encontró la ciudad

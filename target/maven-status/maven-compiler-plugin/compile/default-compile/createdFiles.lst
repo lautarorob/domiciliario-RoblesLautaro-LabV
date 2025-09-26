@@ -5,6 +5,7 @@ entidades\Country.class
 controladores\controladorCity$PaisConDistritos.class
 entidades\CountrylanguagePK.class
 com\mycompany\domiciliario\JakartaRestConfiguration.class
+controladores\controladorCountry$ContinenteConRegiones.class
 com\mycompany\domiciliario\resources\JakartaEE10Resource.class
 repositorios\repositorioCity.class
 controladores\controladorCountry.class

@@ -5,43 +5,57 @@
                 template="./../templates/layout.xhtml"
                 xmlns:h="jakarta.faces.html"
                 xmlns:f="jakarta.faces.core">
-    
+
     <ui:define name="content">
-        
-        <h:form id="formularioEdicion" onsubmit="return validarFormulario();">
-            
-            <h:panelGrid columns="3">
+
+        <h:form id="formularioEdicion"> <!-- onsubmit="return validarFormulario();" -->
+
+            <h:panelGrid columns="4">
                 <f:facet name="header">
                     <h:outputText value="Añadir Ciudad"/>
                 </f:facet>
 
                 <h:outputLabel value="Name" for="name"/>
-                <h:inputText id="name" value="#{controladorCity.city.name}" style="margin-bottom: 5px;"/>
-                <p id="formularioEdicion:errorName" class="error"></p>
+                <h:inputText id="name" value="#{controladorCity.city.name}" style="margin-bottom: 5px;">
+                    <f:validateRequired/>
+                </h:inputText>
+                <h:message for="name" style="color: red;"/>
+                <!-- <p id="formularioEdicion:errorName" class="error"></p>-->
 
                 <h:outputLabel value="District" for="district"/>
-                <h:inputText id="district" value="#{controladorCity.city.district}" style="margin-bottom: 5px;"/>
-                <span id="formularioEdicion:errorDistrict" class="error"></span>
+                <h:inputText id="district" value="#{controladorCity.city.district}" style="margin-bottom: 5px;">
+                    <f:validateRequired/>
+                </h:inputText>
+                <h:message for="district" style="color: red;"/>
+                <!-- <span id="formularioEdicion:errorDistrict" class="error"></span>-->
 
                 <h:outputLabel value="Population" for="population"/>
-                <h:inputText id="population" value="#{controladorCity.city.population}" style="margin-bottom: 5px;"/>
-                <span id="formularioEdicion:errorPopulation" class="error"></span>
+                <h:inputText id="population" value="#{controladorCity.city.population}" style="margin-bottom: 5px;">
+                    <f:validateRequired/>
+                    <f:convertNumber integerOnly="true"/>
+                    <f:validateLongRange minimum="1"/>
+                </h:inputText>
+                <h:message for="population" style="color: red;"/>
+                <!-- <span id="formularioEdicion:errorPopulation" class="error"></span>-->
 
                 <h:outputLabel value="CountryCode" for="countrycode"/>
                 <h:selectOneMenu id="countrycode" value="#{controladorCity.city.countryCode}" style="width: 195px; margin-bottom: 5px;">
                     <f:selectItem itemLabel="--Seleccione un pais--" itemValue="" noSelectionOption="true"/>
                     <f:selectItems value="#{controladorCountry.listadoCountries()}" var="c"
                                    itemValue="#{c.code}" itemLabel="#{c.name}" />
+                    <f:validateRequired/>
                 </h:selectOneMenu>
-                <span id="formularioEdicion:errorCountry" class="error"></span>
+                <h:message for="countrycode" style="color: red;"/>
+                <!--  <span id="formularioEdicion:errorCountry" class="error"></span>-->
 
-                <h:panelGroup></h:panelGroup> <!-- Celda vacía para alinear el botón -->
+
                 <h:commandButton value="Agregar" action="#{controladorCity.guardar()}"/>
+                <h:panelGroup></h:panelGroup> <!-- Celda vacía para alinear el botón -->
                 <h:panelGroup></h:panelGroup> <!-- Celda vacía -->
             </h:panelGrid>
-            
+
         </h:form>
-        
+
     </ui:define>
-    
+
 </ui:composition>
